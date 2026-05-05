@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { initializeFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration using environment variables
@@ -16,8 +16,11 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 
-// Initialize Cloud Firestore Database
-export const db = getFirestore(app);
+// Initialize Cloud Firestore Database with long-polling forced and streams disabled to avoid QUIC protocol errors
+export const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true,
+  useFetchStreams: false,
+});
 
 // Initialize Analytics (only works in browser environments)
 export const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
