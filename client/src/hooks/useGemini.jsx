@@ -35,8 +35,13 @@ export function useGemini() {
   useEffect(() => {
     console.info("[useGemini] Hook initialized. Stable socket connection establishing...");
     
-    // Initialize socket connection ONCE
-    socketRef.current = io(SOCKET_SERVER_URL);
+    // Initialize socket connection ONCE with websocket transport for better Cloud Run compatibility
+    socketRef.current = io(SOCKET_SERVER_URL, {
+      transports: ["websocket"],
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000
+    });
+
 
     socketRef.current.on("chatChunk", (chunk) => {
       setMessages((prev) => {

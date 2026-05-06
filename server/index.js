@@ -5,18 +5,31 @@ import dotenv from 'dotenv';
 import geminiRoutes from './routes/geminiRoutes.js';
 import { setupSocketHandlers } from './socketHandler.js';
 
+import cors from 'cors';
+
 dotenv.config();
 
 const app = express();
+
+const allowedOrigins = process.env.CORS_ORIGIN && process.env.CORS_ORIGIN !== '*'
+  ? process.env.CORS_ORIGIN.split(',') 
+  : "*";
+
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ["GET", "POST"]
+}));
 app.use(express.json());
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.CORS_ORIGIN || "*",
+    origin: allowedOrigins,
     methods: ["GET", "POST"]
   }
 });
+
 
 // Health check route
 app.get('/health', (req, res) => {

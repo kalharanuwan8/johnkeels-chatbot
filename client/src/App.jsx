@@ -7,6 +7,7 @@ import History from "./components/History";
 import Sectors from "./components/Sectors";
 import Help from "./components/Help";
 import Profile from "./components/Profile";
+import CrisisCommandCenter from "./components/CrisisCommandCenter";
 
 const TypingIndicator = () => (
   <div className="msg-animate flex gap-3 items-end">
@@ -128,6 +129,7 @@ export default function App() {
         {activeTab === 'sectors' && <Sectors />}
         {activeTab === 'help' && <Help />}
         {activeTab === 'profile' && <Profile />}
+        {activeTab === 'crisis' && <CrisisCommandCenter />}
 
         {/* Input */}
         {activeTab === 'chat' && (
