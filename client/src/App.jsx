@@ -59,9 +59,22 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeTab, setActiveTab] = useState('chat');
 
+  const [isAtBottom, setIsAtBottom] = useState(true);
+  const scrollRef = useRef(null);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+    // Threshold of 100px to consider "at bottom"
+    const atBottom = scrollHeight - scrollTop - clientHeight < 100;
+    setIsAtBottom(atBottom);
+  };
+
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+    if (isAtBottom) {
+      bottomRef.current?.scrollIntoView({ behavior: "auto" });
+    }
+  }, [messages, loading, isAtBottom]);
 
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-white font-sans text-[#1E293B]">
@@ -106,7 +119,7 @@ export default function App() {
 
         {/* Messages */}
         {activeTab === 'chat' && (
-          <div className="flex-1 overflow-y-auto px-4 py-8 pb-24 md:pb-8">
+          <div ref={scrollRef} onScroll={handleScroll} className="flex-1 overflow-y-auto px-4 py-8 pb-24 md:pb-8">
             <div className="max-w-[768px] mx-auto flex flex-col gap-8">
               {messages.length === 0 ? (
                 <EmptyState />
