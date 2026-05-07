@@ -74,7 +74,7 @@ export default function App() {
     if (isAtBottom) {
       bottomRef.current?.scrollIntoView({ behavior: "auto" });
     }
-  }, [messages, loading, isAtBottom]);
+  }, [messages.length, loading, isAtBottom]);
 
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-white font-sans text-[#1E293B]">
