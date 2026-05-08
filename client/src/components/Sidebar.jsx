@@ -58,23 +58,6 @@ export default function Sidebar({ onNewChat, messageCount, activeTab, setActiveT
           History
         </a>
 
-        <a onClick={(e) => handleNavClick(e, 'sectors')} className={navItemClass('sectors')}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
-            <path d="M9 22v-4h6v4"/>
-            <path d="M8 6h.01"/>
-            <path d="M16 6h.01"/>
-            <path d="M12 6h.01"/>
-            <path d="M12 10h.01"/>
-            <path d="M12 14h.01"/>
-            <path d="M16 10h.01"/>
-            <path d="M16 14h.01"/>
-            <path d="M8 10h.01"/>
-            <path d="M8 14h.01"/>
-          </svg>
-          Sectors
-        </a>
-
         <a onClick={(e) => handleNavClick(e, 'help')} className={navItemClass('help')}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10"/>
@@ -84,14 +67,7 @@ export default function Sidebar({ onNewChat, messageCount, activeTab, setActiveT
           Help
         </a>
 
-        <a onClick={(e) => handleNavClick(e, 'crisis')} className={navItemClass('crisis')}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-            <line x1="12" y1="9" x2="12" y2="13"/>
-            <line x1="12" y1="17" x2="12.01" y2="17"/>
-          </svg>
-          Crisis
-        </a>
+
       </nav>
 
       <div className="flex-1" />
