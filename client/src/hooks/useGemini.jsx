@@ -159,5 +159,5 @@ export function useGemini() {
     setError(null);
   }, []);
 
-  return { messages, loading, error, sendMessage, clearChat, loadSession };
+  return { messages, loading, error, sessionId, sendMessage, clearChat, loadSession };
 }

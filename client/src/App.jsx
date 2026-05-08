@@ -54,7 +54,7 @@ const EmptyState = () => (
 );
 
 export default function App() {
-  const { messages, loading, error, sendMessage, clearChat, loadSession } = useGemini();
+  const { messages, loading, error, sessionId, sendMessage, clearChat, loadSession } = useGemini();
   const bottomRef = useRef(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeTab, setActiveTab] = useState('chat');
@@ -138,7 +138,13 @@ export default function App() {
           </div>
         )}
 
-        {activeTab === 'history' && <History onLoadSession={(id, hist) => { loadSession(id, hist); setActiveTab('chat'); }} />}
+        {activeTab === 'history' && (
+          <History 
+            currentSessionId={sessionId}
+            onClearActiveSession={clearChat}
+            onLoadSession={(id, hist) => { loadSession(id, hist); setActiveTab('chat'); }} 
+          />
+        )}
         {activeTab === 'sectors' && <Sectors />}
         {activeTab === 'help' && <Help />}
         {activeTab === 'profile' && <Profile />}
